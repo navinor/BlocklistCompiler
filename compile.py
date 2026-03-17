@@ -66,6 +66,39 @@ DOMAIN_WHITELIST = {
     "ip6-loopback",
 }
 
+# ABP options that act as context/type scopes that Pi-hole cannot enforce.
+# If an ABP rule contains any of these, it is not a blanket domain block.
+# Some lists use ~resource to exclude things, but even positive resource 
+# matches mean "only block if it's an image". Pi-hole can't do that.
+# See: https://help.eyeo.com/adblockplus/how-to-write-filters
+UNSUPPORTED_ABP_OPTIONS = (
+    "domain=",
+    "third-party", 
+    "~third-party",
+    "script", "~script",
+    "image", "~image",
+    "stylesheet", "~stylesheet",
+    "object", "~object",
+    "xmlhttprequest", "~xmlhttprequest",
+    "subdocument", "~subdocument",
+    "ping", "~ping",
+    "websocket", "~websocket",
+    "webrtc", "~webrtc",
+    "document", "~document",
+    "elemhide", "~elemhide",
+    "genericblock", "~genericblock",
+    "generichide", "~generichide",
+    "other", "~other",
+    "font", "~font",
+    "media", "~media",
+    "match-case", "~match-case",
+    "collapse", "~collapse",
+    "donottrack",
+    "csp=",
+    "rewrite=",
+    "header=",
+)
+
 
 def extract_domain(line: str) -> str | None:
     """Try to extract a blockable domain from a single line.
@@ -90,11 +123,11 @@ def extract_domain(line: str) -> str | None:
     if m:
         options = m.group(5)  # e.g. "$third-party,~script" or None
         if options:
-            # Reject rules with exclusion modifiers (e.g. ~script, ~image)
-            # since Pi-hole can't selectively allow certain resource types
             option_list = options.lstrip("$").split(",")
-            if any(opt.startswith("~") for opt in option_list):
-                return None
+            # If any option acts as a restrictive modifier, Pi-hole can't enforce it globally.
+            for opt in option_list:
+                if any(opt.startswith(unsupported) for unsupported in UNSUPPORTED_ABP_OPTIONS):
+                    return None
         return m.group(1).lower()
 
     # 2. Hosts-file format
