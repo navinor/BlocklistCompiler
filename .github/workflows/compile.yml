@@ -1,0 +1,40 @@
+name: Compile Blocklist
+
+on:
+  # Run daily at 4:00 AM UTC
+  schedule:
+    - cron: "0 4 * * *"
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+  # Also run when sources.txt or the script itself changes
+  push:
+    paths:
+      - "sources.txt"
+      - "compile.py"
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run compiler
+        run: python compile.py
+
+      - name: Commit and push blocklist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blocklist.txt
+          # Only commit if there are actual changes
+          git diff --cached --quiet || git commit -m "Update blocklist $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
