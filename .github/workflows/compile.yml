@@ -1,9 +1,10 @@
 name: Compile Blocklist
 
 on:
-  # Run daily at 3:00 AM UTC
+  # Run twice a day at 3:00 AM and 3:00 PM UTC
   schedule:
     - cron: "0 3 * * *"
+    - cron: "0 15 * * *"
   # Allow manual trigger from the Actions tab
   workflow_dispatch:
   # Also run when sources.txt or the script itself changes
