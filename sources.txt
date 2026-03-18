@@ -21,3 +21,12 @@ https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters
 https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/badware.txt
 https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/quick-fixes.txt
 https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/unbreak.txt
+
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/ChineseFilter/sections/adservers.txt
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/ChineseFilter/sections/adservers_firstparty.txt
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/BaseFilter/sections/adservers.txt
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/BaseFilter/sections/adservers_firstparty.txt
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/tracking_servers.txt
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/tracking_servers_firstparty.txt
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/mobile.txt
+https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/MobileFilter/sections/adservers.txt
