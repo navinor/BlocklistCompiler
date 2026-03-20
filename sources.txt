@@ -30,3 +30,8 @@ https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/S
 https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/tracking_servers_firstparty.txt
 https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/mobile.txt
 https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/MobileFilter/sections/adservers.txt
+
+WHITELIST https://raw.githubusercontent.com/cedwards4038/pihole-whitelist/main/whitelist.txt
+WHITELIST https://raw.githubusercontent.com/GoodnessJSON/PiHole-Whitelist/master/lists/whitelist.txt
+WHITELIST https://raw.githubusercontent.com/GoodnessJSON/PiHole-Whitelist/master/lists/referral-sites.txt
+WHITELIST https://raw.githubusercontent.com/GoodnessJSON/PiHole-Whitelist/master/lists/optional-list.txt
