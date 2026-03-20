@@ -4,5 +4,3 @@ __pycache__/
 pyproject.toml
 .gitattributes
 test_compile.py
-blocklist.txt
-whitelist.txt
