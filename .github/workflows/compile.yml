@@ -7,7 +7,7 @@ on:
       timezone: "America/New_York"
 
   workflow_dispatch:
-
+  # Also run when sources.txt or the script itself change
   push:
     paths:
       - "sources.txt"
