@@ -1,13 +1,13 @@
 name: Compile Lists
 
 on:
-  # Run twice a day at 3:00 AM and 3:00 PM UTC
+  # Run daily at 11:30 PM Eastern Time
   schedule:
-    - cron: "0 3 * * *"
-    - cron: "0 15 * * *"
-  # Allow manual trigger from the Actions tab
+    - cron: "30 23 * * *"
+      timezone: "America/New_York"
+
   workflow_dispatch:
-  # Also run when sources.txt or the script itself changes
+
   push:
     paths:
       - "sources.txt"
