@@ -7,11 +7,19 @@ on:
       timezone: "America/New_York"
 
   workflow_dispatch:
-  # Also run when sources.txt or the script itself change
+  # Also run when sources.txt, the script, its tests, or this workflow change
   push:
     paths:
       - "sources.txt"
       - "compile.py"
+      - "test_compile.py"
+      - ".github/workflows/compile.yml"
+
+# Allow only one active run per workflow/ref without cancelling it.
+# GitHub may replace an older pending run with a newer pending run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   compile:
@@ -22,11 +30,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Resolve the branch tip at run time rather than the triggering
+          # SHA, so a queued run picks up the previous run's commit.
+          ref: ${{ github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Run offline tests
+        run: python -B -m unittest -v test_compile
 
       - name: Run compiler
         run: python compile.py
