@@ -1,11 +1,10 @@
 name: Compile Lists
 
 on:
-  # Run daily at 11:30 PM Eastern Time
   schedule:
     - cron: "30 23 * * *"
       timezone: "America/New_York"
-
+      
   workflow_dispatch:
   # Also run when sources.txt, the script, its tests, or this workflow change
   push:
